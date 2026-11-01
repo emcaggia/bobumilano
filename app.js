@@ -1,4 +1,4 @@
-// BOBU Milano: product frames that follow the scroll, with no pinning, and films that play when seen.
+// BOBU Milano: product frames that follow the swipe and the scroll, cards, and films that play when seen.
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const nav = document.querySelector('.nav');
@@ -14,13 +14,15 @@ const films = new IntersectionObserver((entries) => {
 }, { threshold: 0.25 });
 document.querySelectorAll('video').forEach((v) => films.observe(v));
 
-// Frame sequences. A product opens as its plate travels up the screen: starting as the plate
-// comes in at the bottom, finished once it reaches the middle. The page never stops moving.
+// Frame sequences. On the page, a product opens as it travels up the screen. In a card, it also
+// opens as the card arrives in the middle and closes as it leaves, so the swipe plays the animation.
 
 class Sequence {
   constructor(section) {
+    this.section = section;
     this.name = section.dataset.frames;
     this.count = Number(section.dataset.count);
+    this.rail = section.closest('.rail');
     this.plate = section.querySelector('.plate');
     this.canvas = section.querySelector('canvas');
     this.ctx = this.canvas.getContext('2d');
@@ -49,21 +51,30 @@ class Sequence {
 
   measure(vh) {
     const rect = this.plate.getBoundingClientRect();
-    if (rect.top < vh * 2.5 && rect.bottom > -vh) this.load();
+    let near = rect.top < vh * 2.5 && rect.bottom > -vh;
+    let centred = 1;
+    if (this.rail) {
+      const rail = this.rail.getBoundingClientRect();
+      const off = Math.abs(rect.left + rect.width / 2 - (rail.left + rail.width / 2)) / rect.width;
+      centred = clamp(1 - off);
+      near = near && off < 2.2;
+      this.section.style.setProperty('--p', centred.toFixed(3));
+    }
+    if (near) this.load();
     if (reduceMotion) return;
     const start = vh * 0.95;
     const end = vh * 0.5 - rect.height * 0.5;
-    this.goal = clamp((start - rect.top) / (start - Math.min(end, start - 200)));
+    this.goal = clamp((start - rect.top) / (start - Math.min(end, start - 200))) * centred;
   }
 
   target() {
     return Math.round(this.now * (this.count - 1));
   }
 
-  // Eases towards the scroll position; true while it still has somewhere to go.
+  // Eases towards the goal; true while it still has somewhere to go.
   step() {
     const gap = this.goal - this.now;
-    this.now = Math.abs(gap) < 0.0015 ? this.goal : this.now + gap * 0.16;
+    this.now = Math.abs(gap) < 0.0015 ? this.goal : this.now + gap * 0.2;
     this.draw();
     return this.now !== this.goal;
   }
@@ -112,4 +123,53 @@ function onScroll() {
 }
 window.addEventListener('scroll', onScroll, { passive: true });
 window.addEventListener('resize', () => { for (const s of sequences) s.shown = -1; onScroll(); });
+
+// Card rails: swipe on a phone, drag or use the arrows with a mouse.
+
+document.querySelectorAll('.rail').forEach((rail) => {
+  const cards = [...rail.children];
+  const ui = rail.nextElementSibling;
+  const ticks = [...ui.querySelectorAll('.rail-ticks button')];
+  const current = () => {
+    const mid = rail.getBoundingClientRect().left + rail.clientWidth / 2;
+    let best = 0, gap = Infinity;
+    cards.forEach((c, i) => {
+      const r = c.getBoundingClientRect();
+      const d = Math.abs(r.left + r.width / 2 - mid);
+      if (d < gap) { gap = d; best = i; }
+    });
+    return best;
+  };
+  const go = (i) => {
+    const card = cards[Math.min(Math.max(i, 0), cards.length - 1)];
+    rail.scrollTo({ left: card.offsetLeft - (rail.clientWidth - card.offsetWidth) / 2, behavior: reduceMotion ? 'auto' : 'smooth' });
+  };
+  const mark = () => {
+    const now = current();
+    ticks.forEach((t, i) => t.classList.toggle('on', i === now));
+  };
+  ticks.forEach((t, i) => t.addEventListener('click', () => go(i)));
+  ui.querySelectorAll('.rail-arrow').forEach((a) => a.addEventListener('click', () => go(current() + Number(a.dataset.go))));
+  rail.addEventListener('scroll', () => { mark(); onScroll(); }, { passive: true });
+  rail.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(current() + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); go(current() - 1); }
+  });
+
+  let down = false, x0 = 0, left0 = 0;
+  rail.addEventListener('pointerdown', (e) => {
+    if (e.pointerType !== 'mouse') return;
+    down = true; x0 = e.clientX; left0 = rail.scrollLeft;
+    rail.classList.add('dragging');
+  });
+  window.addEventListener('pointermove', (e) => { if (down) rail.scrollLeft = left0 - (e.clientX - x0); });
+  window.addEventListener('pointerup', () => {
+    if (!down) return;
+    down = false;
+    rail.classList.remove('dragging');
+    go(current());
+  });
+  mark();
+});
+
 onScroll();
