@@ -15,6 +15,16 @@ const seen = new IntersectionObserver((entries) => {
 }, { rootMargin: '0px 0px -10% 0px' });
 document.querySelectorAll('.reveal').forEach((el) => seen.observe(el));
 
+// The films play only while they're on screen.
+
+const films = new IntersectionObserver((entries) => {
+  for (const e of entries) {
+    if (e.isIntersecting && !reduceMotion) e.target.play().catch(() => {});
+    else e.target.pause();
+  }
+}, { threshold: 0.25 });
+document.querySelectorAll('video').forEach((v) => films.observe(v));
+
 // Frame sequences
 
 class Scrub {
@@ -55,6 +65,7 @@ class Scrub {
     // Opens over the first 80% of the section, then holds open.
     this.target = Math.round(Math.min(p / 0.8, 1) * (this.count - 1));
     this.section.style.setProperty('--in', rect.top < vh * 0.45 ? '1' : '0');
+    this.section.style.setProperty('--p', p.toFixed(3));
     this.draw();
   }
 
