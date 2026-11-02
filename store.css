@@ -83,6 +83,21 @@ svg.arrow{display:inline-block;width:1.3em;height:1.3em;fill:none;stroke:current
 .page-intro .intro-art{width:70px;height:104px;opacity:.42}
 .profile-hero:has(.profile-photo) .avatar{display:none}
 #main{overflow-x:clip}
+/* Members come forward: large photo tiles, and the person first on every formula card. */
+.member-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-bottom:22px}
+.member-tile{position:relative;display:flex;align-items:center;gap:22px;background:var(--sand)}
+.member-tile img{display:block;width:clamp(150px,16vw,240px);aspect-ratio:1;object-fit:cover;flex:none}
+.member-tile-text{display:block;padding-right:48px}
+.member-tile strong{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(28px,3vw,42px);letter-spacing:-.035em;color:var(--ink);line-height:1.1}
+.member-tile small{display:block;margin-top:6px;font-size:13px;color:var(--muted)}
+.member-tile>svg.arrow{position:absolute;right:16px;bottom:16px;width:24px;height:24px;color:var(--ink)}
+.section.members-section{padding-bottom:0}
+.page-intro+.members-section{padding-top:0}
+.members-section:has(+.brand-banner){padding-bottom:60px}
+.formula-info{display:flex;flex-direction:column}
+.creator-link{order:-1;margin-bottom:16px;font-size:14px;color:var(--ink)}
+.creator-link small{font-size:12px}
+.creator-link .avatar{width:46px;height:46px;margin-right:4px}
 /* How IDs work: a dropdown under the Formula Club. */
 .how-ids{margin-top:28px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
 .how-ids summary{min-height:58px;font-size:15px}
@@ -144,6 +159,16 @@ svg.arrow{display:inline-block;width:1.3em;height:1.3em;fill:none;stroke:current
  .cookie-notice span{display:none}
  .cookie-notice button{min-height:32px}
  .how-ids-body{grid-template-columns:1fr;gap:24px}
+ .member-tiles{gap:10px}
+ .member-tile{display:block}
+ .member-tile img{width:100%}
+ .member-tile-text{padding:10px 40px 12px 12px}
+ .member-tile strong{font-size:25px}
+ .member-tile small{font-size:12px}
+ .member-tile>svg.arrow{right:10px;bottom:12px;width:20px;height:20px}
+ .creator-link{font-size:13px;margin-bottom:12px}
+ .creator-link small{font-size:11px}
+ .creator-link .avatar{width:38px;height:38px}
  .footer-bottom .legal-links{order:2;flex-basis:100%}
  .wordmark{font-size:28px}
  .wordmark small{font-size:5px}
