@@ -166,7 +166,7 @@
     const count = all.length / 3;
     const ui = rail.nextElementSibling;
     const ticks = [...ui.querySelectorAll('.rail-ticks button')];
-    const sequencesOf = all.map((card) => sequences.get(card.querySelector('[data-frames]')));
+    const sequencesOf = all.map((card) => sequences.get(card.querySelector('[data-frames]'))).filter(Boolean);
     const shown = () => (wide.matches ? all : all.slice(count, count * 2));
     const offsetFor = (card) => card.offsetLeft - (rail.clientWidth - card.offsetWidth) / 2;
 
