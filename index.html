@@ -16,7 +16,7 @@
 <link rel="icon" href="assets/icon.png">
 <link rel="apple-touch-icon" href="assets/icon.png">
 <link rel="preload" href="assets/fonts/BOBUSignature-Regular.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=58">
+<link rel="stylesheet" href="styles.css?v=60">
 </head>
 <body>
 
@@ -26,7 +26,7 @@
     <a href="#kit">Products</a>
     <a href="#how">How it works</a>
     <a href="#store">Store</a>
-    <a href="formulas.html">Formula IDs</a>
+    <a href="#ids">Formula IDs</a>
     <a href="members.html">Members</a>
   </nav>
   <a class="pill pill-small" href="#app">Get the app</a>
@@ -36,8 +36,8 @@
 
   <section class="hero hero-home">
     <picture>
-      <source media="(min-width: 821px)" srcset="assets/photo/lipstick-wide-1800.webp 1800w, assets/photo/lipstick-wide-2800.webp 2800w, assets/photo/lipstick-wide-3676.webp 3676w" sizes="100vw">
-      <img class="hero-photo" src="assets/photo/lipstick-tall-860.webp" srcset="assets/photo/lipstick-tall-860.webp 860w, assets/photo/lipstick-tall-1170.webp 1170w, assets/photo/lipstick-tall-1700.webp 1700w" sizes="100vw" width="1700" height="2881" fetchpriority="high" alt="A woman with freckles and wet hair putting on a coral lipstick from an enamelled tube, in front of a warm wall with palm shadows">
+      <source media="(min-width: 821px)" srcset="assets/photo/lipstick-wide-1800.webp 1800w, assets/photo/lipstick-wide-2800.webp 2800w, assets/photo/lipstick-wide-3600.webp 3600w" sizes="100vw">
+      <img class="hero-photo" src="assets/photo/lipstick-tall-860.webp" srcset="assets/photo/lipstick-tall-860.webp 860w, assets/photo/lipstick-tall-1170.webp 1170w, assets/photo/lipstick-tall-1700.webp 1700w" sizes="100vw" width="1700" height="2511" fetchpriority="high" alt="A woman with freckles and wet hair putting on a coral lipstick from an enamelled tube, in front of a warm wall with palm shadows">
     </picture>
     <div class="hero-words">
       <h1 class="display">Makeup formulated just for you.</h1>
@@ -148,14 +148,28 @@
     <button class="pill" type="button" aria-disabled="true">Request to join the waitlist</button>
   </section>
 
-  <section class="ids">
+  <section class="ids" id="ids">
     <div class="copy">
       <h2 class="display">Every formula has an ID.</h2>
       <p>Your colour and your scan make one formula, with its own ID on the pack. Name it and share it, or buy someone else's.</p>
       <div class="hero-actions">
         <a class="pill" href="members.html">See the members</a>
-        <a class="link" href="formulas.html">How IDs work</a>
+        <button class="link ids-toggle" type="button" aria-expanded="false" aria-controls="ids-more">How IDs work<i aria-hidden="true"></i></button>
       </div>
+    </div>
+    <div class="ids-more" id="ids-more" hidden>
+      <p class="eyebrow">What an ID does</p>
+      <ul class="points">
+        <li><h3>It never changes</h3><p>The same ID is the same formula in every box.</p></li>
+        <li><h3>A new colour is a new ID</h3><p>The name you gave it stays.</p></li>
+        <li><h3>The name is yours</h3><p>Change it whenever you like.</p></li>
+      </ul>
+      <p class="eyebrow">Buying someone's formula</p>
+      <ul class="points">
+        <li><h3>Find it</h3><p>Browse members' profiles in the app.</p></li>
+        <li><h3>Add it</h3><p>One tap in the app.</p></li>
+        <li><h3>Wear it</h3><p>It arrives in your next box.</p></li>
+      </ul>
     </div>
     <div class="member-tiles"><a class="member-tile" href="members.html#gabriela"><img src="assets/photo/gabriela.webp" alt="Gabriela" width="750" height="750" loading="lazy"><p>Gabriela</p><code>F-8BBQ9K</code></a><a class="member-tile" href="members.html#mika"><img src="assets/photo/mika.webp" alt="Mika" width="750" height="750" loading="lazy"><p>Mika</p><code>F-JBJSXT</code></a></div>
   </section>
@@ -175,13 +189,13 @@
   <div class="footer-row">
     <span class="brand">BOBU</span>
     <p>Milano</p>
-    <a href="formulas.html">Formula IDs</a>
+    <a href="#ids">Formula IDs</a>
     <a href="members.html">Members</a>
     <p class="small">© 2026 BOBU Milano</p>
   </div>
   <img class="footer-panther" src="assets/art/panther-sitting.svg" alt="" loading="lazy">
 </footer>
 
-<script src="app.js?v=58" defer></script>
+<script src="app.js?v=60" defer></script>
 </body>
 </html>

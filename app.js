@@ -148,6 +148,18 @@ function onScroll() {
 window.addEventListener('scroll', onScroll, { passive: true });
 window.addEventListener('resize', () => { for (const s of sequences) s.shown = -1; onScroll(); });
 
+// "How IDs work" opens in place.
+
+const idsToggle = document.querySelector('.ids-toggle');
+if (idsToggle) {
+  const panel = document.getElementById(idsToggle.getAttribute('aria-controls'));
+  idsToggle.addEventListener('click', () => {
+    const open = panel.hidden;
+    panel.hidden = !open;
+    idsToggle.setAttribute('aria-expanded', String(open));
+  });
+}
+
 // Card rails: swipe on a phone; on wide screens drag or use the arrows, and the set loops.
 
 document.querySelectorAll('.rail').forEach((rail) => {
