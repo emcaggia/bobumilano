@@ -52,6 +52,7 @@ svg.arrow{display:inline-block;width:1.3em;height:1.3em;fill:none;stroke:current
 .product-caption p{font-size:12px}
 /* Hero: our photo, the words straight on its wall, no veils. */
 .hero:after{display:none}
+.hero{background:#e4bcaa}
 .hero h1,.hero .eyebrow,.hero-description,.hero .text-link{color:#4b2b1b}
 /* Product stages hold our plates and the opening animation. */
 .product-stage,.product-gallery .product-stage,.finder-result .product-stage,.featured .product-card:last-child .product-stage{display:block;aspect-ratio:auto;min-height:0;border:1px solid var(--rule)}
@@ -105,7 +106,7 @@ svg.arrow{display:inline-block;width:1.3em;height:1.3em;fill:none;stroke:current
 .cookie-notice{position:fixed;z-index:40;left:16px;bottom:16px;width:min(430px,calc(100vw - 32px));display:flex;align-items:center;gap:14px;background:var(--paper);border:1px solid var(--ink);padding:12px 14px}
 .cookie-notice p{flex:1;margin:0;font-size:12.5px;line-height:1.4;color:var(--ink)}
 .cookie-notice a{text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
-body:has(.cookie-notice) .footer-bottom{padding-bottom:84px}
+@media(min-width:761px){body:has(.cookie-notice) .footer-bottom{padding-bottom:84px}}
 .cookie-notice button{flex:none;min-width:44px;min-height:38px;padding:0 16px;background:none;border:1px solid var(--ink);border-radius:999px;color:var(--ink);font-family:var(--font);font-size:12px;cursor:pointer}
 /* Our carousel: cards show on both sides, and a product opens as it reaches the middle. */
 .rail{--card:min(72vw,400px);position:relative;display:flex;gap:14px;width:100vw;margin-left:calc(50% - 50vw);overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:4px calc((100vw - var(--card)) / 2) 8px;cursor:grab;outline:none}
@@ -138,13 +139,16 @@ body:has(.cookie-notice) .footer-bottom{padding-bottom:84px}
  .hero h1{font-size:clamp(50px,5.4vw,92px)}
 }
 @media(max-width:760px){
- .cookie-notice{bottom:calc(76px + env(safe-area-inset-bottom))}
+ /* On a phone the notice sits on the wall above the words, not across her face. */
+ .cookie-notice{bottom:auto;top:calc(var(--header) + 30px);padding:7px 10px 7px 14px}
+ .cookie-notice span{display:none}
+ .cookie-notice button{min-height:32px}
  .how-ids-body{grid-template-columns:1fr;gap:24px}
  .footer-bottom .legal-links{order:2;flex-basis:100%}
  .wordmark{font-size:28px}
  .wordmark small{font-size:5px}
  .footer-brand .wordmark,.dialog-top .wordmark{font-size:18px}
- .hero{height:auto;min-height:0;max-height:none;aspect-ratio:3000/4700;display:block}
+ .hero{height:auto;min-height:0;max-height:none;aspect-ratio:1134/1847;display:block}
  .hero-photo{object-position:50% 0}
  .hero-copy{display:block;padding:24px 20px 0}
  .hero .eyebrow{margin-bottom:12px}
