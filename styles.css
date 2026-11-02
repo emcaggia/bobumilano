@@ -106,7 +106,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .hero-foot { order: 2; padding: 16px var(--gutter) 30px; }
 .hero-foot .lede { font-size: 19px; line-height: 1.4; max-width: 24em; margin: 0; }
 .hero-actions { display: flex; align-items: center; gap: 22px; margin: 18px 0 12px; flex-wrap: wrap; }
-.hero-page .idcard { order: 1; margin: 18px var(--gutter) 40px; }
 /* The landing photo fills the section, and the words sit straight on its open wall. */
 .hero-home { --hu: min(1vw, 5.2px); display: block; position: relative; overflow: hidden; margin-top: var(--nav); padding: 0; height: min(147.7vw, calc(100svh - var(--nav))); background: var(--hero); }
 .hero-photo { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: 50% 0; }
@@ -161,8 +160,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 /* How it works */
 .how { padding: 44px var(--gutter) 40px; }
-.how-tinted { background: var(--hero); }
-.how > p { max-width: 30em; }
 .steps { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 16px; }
 .steps li { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 16px; align-items: start; }
 .step-art { width: 100%; height: auto; overflow: visible; }
@@ -171,16 +168,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .steps li p:last-child, .points li p:last-child { font-size: 16px; margin-bottom: 0; }
 .points { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 14px; }
 .points li { border-top: 1px solid var(--rule); padding-top: 12px; }
-.qa { margin: 8px 0 0; }
-.qa dt { font-size: 20px; color: var(--ink); padding-top: 16px; border-top: 1px solid var(--rule); margin-top: 16px; }
-.qa dt:first-child { margin-top: 0; }
-.qa dd { margin: 4px 0 0; font-size: 16px; }
 
 /* Formula IDs */
-.facts { display: grid; grid-template-columns: auto 1fr; margin: 10px 0 0; border-top: 1px solid var(--rule); }
-.facts dt, .facts dd { margin: 0; padding: 8px 0; border-bottom: 1px solid var(--rule); }
-.facts dt { font-weight: 700; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; padding-right: 20px; display: flex; align-items: center; }
-.facts dd { text-align: right; font-weight: 700; font-size: 15.5px; }
 .ids { padding: 40px var(--gutter); background: var(--hero); }
 .ids .copy { padding: 0 0 16px; }
 .ids .copy p { margin-bottom: 0; max-width: 30em; }
@@ -201,7 +190,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .member-tile p { margin: 8px 0 0; font-weight: 700; line-height: 1.25; }
 .member-tile code, .formula-list code { font-family: var(--display); font-size: 13.5px; color: var(--ink); letter-spacing: 0.02em; }
 .hero-short { padding-bottom: 8px; }
-.how > .pill { margin-top: 22px; }
 .members { display: grid; gap: 32px; padding: 28px var(--gutter) 0; }
 .member { display: grid; grid-template-columns: 38% minmax(0, 1fr); column-gap: 16px; align-items: end; scroll-margin-top: calc(var(--nav) + 16px); }
 .member-head .display { margin-bottom: 0; font-size: clamp(30px, 9vw, 46px); }
@@ -213,12 +201,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .formula-list span { font-weight: 700; font-size: 15px; line-height: 1.2; }
 .formula-list small { display: block; font-weight: 400; font-size: 13.5px; }
 .members-note { font-size: 14px; padding: 22px var(--gutter) 0; margin: 0; }
-.idcard { position: relative; margin: 0; padding: 16px 18px 18px; max-width: 420px; background: var(--paper); border: 1px solid var(--rule); }
-.idcard-head { display: flex; justify-content: space-between; font-weight: 700; font-size: 10.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--label); }
-.idcard img { height: 210px; width: auto; margin: 12px auto 12px; }
-.idcard-label { font-weight: 700; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 2px; }
-.idcard-id { font-family: var(--display); font-size: clamp(34px, 11vw, 46px); line-height: 1.05; color: var(--ink); margin-bottom: 8px; }
-.idcard-bars { width: 100%; height: 26px; margin-top: 14px; color: var(--ink); }
 
 /* The store: the standard range, and one button. */
 .store { padding: 44px var(--gutter) 48px; }
@@ -268,7 +250,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .hero-home .hero-actions { gap: 16px; margin: 1.3vw 0 0; }
   .hero-home .pill { min-height: clamp(40px, 3.3vw, 56px); padding: 0 clamp(16px, 1.7vw, 28px); font-size: clamp(10px, .8vw, 13px); }
   .hero-page { min-height: 86svh; padding-bottom: 48px; }
-  .hero-page .idcard { margin: 0; width: min(36vw, 400px); }
 
   .kit { padding: clamp(56px, 6vw, 90px) 0; }
   .kit-head { grid-template-columns: minmax(0, 1fr) minmax(0, 340px); padding: 0 var(--gutter) 30px; gap: 40px; }
@@ -308,9 +289,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .step-n { font-size: 32px; margin: 20px 0 8px; }
   .steps h3, .points h3 { font-size: 24px; margin-bottom: 10px; }
   .steps li p:last-child, .points li p:last-child { font-size: 18px; }
-  .qa { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); column-gap: 40px; max-width: 980px; }
-  .qa dt, .qa dd { border-top: 1px solid var(--rule); padding-top: 16px; margin: 16px 0 0; }
-  .qa dt:first-child { margin-top: 16px; }
 
 
   .app { padding: clamp(50px, 5vw, 80px) var(--gutter); grid-template-columns: auto minmax(0, 1fr); gap: 40px; align-items: center; }
