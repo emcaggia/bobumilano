@@ -43,10 +43,9 @@ svg.arrow{display:inline-block;width:1.3em;height:1.3em;fill:none;stroke:current
 .entry-path:first-child{background:var(--blush)}
 .entry-path:first-child>.arrow{color:var(--cobalt)}
 .hero-product{display:none}
-/* Pills, as on our site. */
-.button,.formula-buy,.filter-tabs button,.mobile-dock a,.mobile-dock button{border-radius:999px}
+/* Buttons have corners. */
 .button{padding-left:26px;padding-right:26px}
-.quick-add{border-radius:50%;border:1px solid var(--rule)}
+.quick-add{border-radius:0;border:1px solid var(--rule)}
 .waitlist{display:flex;margin-top:32px;cursor:default;justify-content:center}.waitlist:active{transform:none}
 .personal-hero .waitlist{display:inline-flex;margin:5px 22px 0 0}
 .product-caption p{font-size:12px}
@@ -59,7 +58,7 @@ svg.arrow{display:inline-block;width:1.3em;height:1.3em;fill:none;stroke:current
 .product-stage:before{display:none}
 .stage-badge{color:var(--clay);z-index:2}
 /* Films stand in arches. */
-.film-play{display:none;position:absolute;left:35%;top:50%;width:54px;height:54px;transform:translate(-50%,-50%);border-radius:50%;background:var(--paper);color:var(--ink);padding:0;border:0;cursor:pointer}
+.film-play{display:none;position:absolute;left:35%;top:50%;width:54px;height:54px;transform:translate(-50%,-50%);border-radius:0;background:var(--paper);color:var(--ink);padding:0;border:0;cursor:pointer}
 .film-play svg{width:24px;height:24px;margin:auto;fill:currentColor}
 .film-waiting .film-play{display:flex;align-items:center;justify-content:center}
 .plate video{object-fit:cover;border-radius:50% 50% 0 0/28.125% 28.125% 0 0;background:var(--rule)}
@@ -122,7 +121,7 @@ svg.arrow{display:inline-block;width:1.3em;height:1.3em;fill:none;stroke:current
 .cookie-notice p{flex:1;margin:0;font-size:12.5px;line-height:1.4;color:var(--ink)}
 .cookie-notice a{text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
 @media(min-width:761px){body:has(.cookie-notice) .footer-bottom{padding-bottom:84px}}
-.cookie-notice button{flex:none;min-width:44px;min-height:38px;padding:0 16px;background:none;border:1px solid var(--ink);border-radius:999px;color:var(--ink);font-family:var(--font);font-size:12px;cursor:pointer}
+.cookie-notice button{flex:none;min-width:44px;min-height:38px;padding:0 16px;background:none;border:1px solid var(--ink);border-radius:0;color:var(--ink);font-family:var(--font);font-size:12px;cursor:pointer}
 /* Our carousel: cards show on both sides, and a product opens as it reaches the middle. */
 .rail{--card:min(72vw,400px);position:relative;display:flex;gap:14px;width:100vw;margin-left:calc(50% - 50vw);overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:4px calc((100vw - var(--card)) / 2) 8px;cursor:grab;outline:none}
 .rail::-webkit-scrollbar{display:none}
@@ -137,7 +136,7 @@ svg.arrow{display:inline-block;width:1.3em;height:1.3em;fill:none;stroke:current
 .rail .product-name-line .price{display:inline;margin:0;font-size:15px}
 .rail .product-caption p{font-size:14px;line-height:1.45;min-height:0;margin:6px 0 11px}
 .rail-ui{display:flex;align-items:center;justify-content:center;gap:12px;padding-top:18px}
-.rail-arrow{width:44px;height:44px;flex:none;display:flex;align-items:center;justify-content:center;border:1px solid var(--ink);border-radius:50%;background:none;color:var(--ink);padding:0;cursor:pointer}
+.rail-arrow{width:44px;height:44px;flex:none;display:flex;align-items:center;justify-content:center;border:1px solid var(--ink);border-radius:0;background:none;color:var(--ink);padding:0;cursor:pointer}
 .rail-arrow[data-go="1"]{background:var(--cobalt);border-color:var(--cobalt);color:var(--paper)}
 .rail-arrow:disabled,.rail-arrow[data-go="1"]:disabled{background:none;border-color:var(--rule);color:var(--rule);cursor:default}
 .rail-ticks{display:flex;gap:2px;list-style:none;margin:0;padding:0}
