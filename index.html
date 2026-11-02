@@ -16,7 +16,7 @@
 <link rel="icon" href="assets/icon.png">
 <link rel="apple-touch-icon" href="assets/icon.png">
 <link rel="preload" href="assets/fonts/BOBUSignature-Regular.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=50">
+<link rel="stylesheet" href="styles.css?v=53">
 </head>
 <body>
 
@@ -34,7 +34,10 @@
 <main id="top">
 
   <section class="hero hero-home">
-    <img class="hero-photo" src="assets/photo/lipstick-wall.webp" width="1254" height="1254" fetchpriority="high" alt="A woman with freckles and wet hair putting on a coral lipstick from an enamelled tube, in front of a warm wall with palm shadows">
+    <picture>
+      <source media="(min-width: 821px)" srcset="assets/photo/lipstick-wide-1800.webp 1800w, assets/photo/lipstick-wide-3000.webp 3000w" sizes="100vw">
+      <img class="hero-photo" src="assets/photo/lipstick-tall-860.webp" srcset="assets/photo/lipstick-tall-860.webp 860w, assets/photo/lipstick-tall-1170.webp 1170w" sizes="100vw" width="1170" height="1980" fetchpriority="high" alt="A close-up of a woman with freckles and wet hair putting on a coral lipstick from an enamelled tube">
+    </picture>
     <div class="hero-words">
       <h1 class="display">Makeup formulated just for you.</h1>
       <div class="hero-foot">
@@ -173,6 +176,6 @@
   <img class="footer-panther" src="assets/art/panther-sitting.svg" alt="" loading="lazy">
 </footer>
 
-<script src="app.js?v=50" defer></script>
+<script src="app.js?v=53" defer></script>
 </body>
 </html>
