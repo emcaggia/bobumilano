@@ -37,7 +37,6 @@ svg.arrow{display:inline-block;width:1.3em;height:1.3em;fill:none;stroke:current
 .button:not(.secondary):not(.light),.mobile-dock a:first-child{background:var(--cobalt);border-color:var(--cobalt);color:var(--paper)}
 .button:not(.secondary):not(.light):hover{background:#1332b5}
 .formula-id,.formula-product-id,.id-ticket strong{color:var(--cobalt)}
-.topline{background:var(--blush);color:var(--ink)}
 .brand-banner{background:#a5674b}
 /* Making your own leads. */
 .entry-path:first-child{background:var(--blush)}
@@ -154,7 +153,7 @@ svg.arrow{display:inline-block;width:1.3em;height:1.3em;fill:none;stroke:current
 }
 @media(max-width:760px){
  /* On a phone the notice sits on the wall above the words, not across her face. */
- .cookie-notice{bottom:auto;top:calc(var(--header) + 30px);padding:7px 10px 7px 14px}
+ .cookie-notice{bottom:auto;top:calc(var(--header) + 6px);padding:7px 10px 7px 14px}
  .cookie-notice span{display:none}
  .cookie-notice button{min-height:32px}
  .how-ids-body{grid-template-columns:1fr;gap:24px}
@@ -174,7 +173,7 @@ svg.arrow{display:inline-block;width:1.3em;height:1.3em;fill:none;stroke:current
  .footer-brand .wordmark,.dialog-top .wordmark{font-size:18px}
  .hero{height:auto;min-height:0;max-height:none;aspect-ratio:1134/1847;display:block}
  .hero-photo{object-position:50% 0}
- .hero-copy{display:block;padding:24px 20px 0}
+ .hero-copy{display:block;padding:64px 20px 0}
  .hero .eyebrow{margin-bottom:12px}
  .hero h1{font-size:clamp(40px,12vw,52px);max-width:none}
  .hero-description{font-size:14px;line-height:1.45;margin:12px 0 14px;max-width:330px;text-shadow:none}
