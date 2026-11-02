@@ -44,20 +44,19 @@ class Sequence {
       img.src = `assets/frames/${this.name}/${i}.webp`;
       img.onload = () => {
         this.frames[i] = img;
-        if (i === 0 || i === this.count - 1 || i === this.target()) { this.shown = -1; wake(); }
+        if (i === 0 || i === this.count - 1 || i === this.target()) { this.shown = -1; this.draw(); wake(); }
       };
     }
   }
 
   measure(vh) {
     const rect = this.plate.getBoundingClientRect();
-    let near = rect.top < vh * 2.5 && rect.bottom > -vh;
+    const near = rect.top < vh * 2.5 && rect.bottom > -vh;
     let centred = 1;
     if (this.rail) {
       const rail = this.rail.getBoundingClientRect();
       const off = Math.abs(rect.left + rect.width / 2 - (rail.left + rail.width / 2)) / rect.width;
       centred = clamp(1 - off);
-      near = near && off < 2.2;
       this.section.style.setProperty('--p', centred.toFixed(3));
     }
     if (near) this.load();
