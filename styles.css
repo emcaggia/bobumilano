@@ -24,7 +24,6 @@
   --orn: 0.42;
   --button: #1A3FDC;
   --label: #74452F;
-  --glow: rgba(255, 250, 240, 0.62);
   --rule: rgba(160, 117, 92, 0.32);
   --body: Optima, "Optima nova", Belleza, Candara, "Segoe UI", sans-serif;
   --display: "BOBU Signature", Optima, sans-serif;
@@ -89,7 +88,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   background: var(--paper);
   border-bottom: 1px solid transparent; transition: border-color 0.3s;
 }
-.nav::after { content: ""; position: absolute; inset: 100% 0 auto 0; height: 16px; background: linear-gradient(var(--paper), transparent); pointer-events: none; }
+.nav.scrolled { border-color: var(--rule); }
 .nav .brand { margin-right: auto; }
 .nav-links { display: none; gap: 28px; }
 .nav-links a { text-decoration: none; font-size: 15px; }
@@ -98,12 +97,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .plate-art, .seal-art, .orn, .orn-img { opacity: var(--orn); }
 .spin { transform-box: fill-box; transform-origin: center; animation: spin 90s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
-
-/* A soft light behind whatever a plate is showing. */
-.plate::before {
-  content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: radial-gradient(closest-side at var(--lx, 50%) var(--ly, 55%), var(--glow), transparent);
-}
 
 /* The landing: the words on one side, the formula opening in an arch on the other. */
 .hero { display: flex; flex-direction: column; padding-top: calc(var(--nav) + 14px); background: var(--hero); }
@@ -115,32 +108,22 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .hero-foot { order: 2; padding: 16px var(--gutter) 30px; }
 .hero-foot .lede { font-size: 19px; line-height: 1.4; max-width: 24em; margin: 0; }
 .hero-actions { display: flex; align-items: center; gap: 22px; margin: 18px 0 12px; flex-wrap: wrap; }
-.hero-page { background: linear-gradient(to bottom, var(--hero) 70%, var(--paper)); }
 .hero-page .idcard { order: 1; margin: 18px var(--gutter) 40px; }
-/* The landing photo fills the section and dissolves into the page. The words sit on its empty wall, lightened underneath so the cobalt reads. */
-.hero-home { display: block; position: relative; overflow: hidden; margin-top: var(--nav); padding: 0; aspect-ratio: 0.975; background: var(--paper); }
-.hero-photo { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: 19% 50%; }
-.hero-home::before {
-  content: ""; position: absolute; z-index: 1; inset: 0 auto 0 0; width: 62%;
-  background: linear-gradient(90deg, color-mix(in srgb, var(--hero) 88%, transparent) 0%, color-mix(in srgb, var(--hero) 82%, transparent) 54%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, #000 58%, transparent 80%); mask-image: linear-gradient(to bottom, #000 58%, transparent 80%);
-}
-.hero-home::after {
-  content: ""; position: absolute; z-index: 1; inset: 0;
-  background: linear-gradient(to bottom, var(--paper) 0%, transparent 9%, transparent 82%, var(--paper) 100%);
-}
-.hero-home .hero-words { display: block; position: relative; z-index: 2; width: 56%; padding: 18px 0 0 var(--gutter); }
-.hero-home h1 { font-size: 6.4vw; text-align: left; padding: 0; margin-bottom: 8px; }
+/* The landing photo fills the section, and the words sit straight on its open wall. */
+.hero-home { --hu: min(1vw, 5.2px); display: block; position: relative; overflow: hidden; margin-top: var(--nav); padding: 0; height: calc(174 * var(--hu)); background: var(--hero); }
+.hero-photo { position: absolute; top: 0; right: 0; width: calc(203 * var(--hu)); height: calc(203 * var(--hu)); max-width: none; }
+.hero-home .hero-words { display: block; position: relative; z-index: 1; padding: calc(4 * var(--hu)) var(--gutter) 0; }
+.hero-home h1 { color: color-mix(in srgb, var(--ink) 90%, #000); font-size: calc(9.8 * var(--hu)); text-align: left; padding: 0; margin-bottom: calc(1.5 * var(--hu)); }
 .hero-home .hero-foot { padding: 0; }
-/* Small lines on the photo: the same blue, a shade deeper, so they stay readable over the wall's shadows. */
-.hero-home .lede, .hero-home .link { color: color-mix(in srgb, var(--ink) 72%, #000); }
-.hero-home .lede { font-size: clamp(14px, 3.6vw, 24px); line-height: 1.3; max-width: 44vw; }
-.hero-home .hero-actions { flex-direction: column; align-items: flex-start; gap: 8px; margin: 10px 0 0; }
-.hero-home .pill { min-height: 40px; padding: 0 18px; font-size: 10.5px; }
+/* Small lines on the photo: the same blue, a shade deeper, so they stay readable on the wall. */
+.hero-home .lede, .hero-home .link { color: color-mix(in srgb, var(--ink) 58%, #000); }
+.hero-home .lede { font-size: calc(4.1 * var(--hu)); line-height: 1.3; max-width: none; }
+.hero-home .hero-actions { flex-direction: row; align-items: center; gap: 16px; margin: calc(2 * var(--hu)) 0 0; }
+.hero-home .pill { min-height: 42px; padding: 0 20px; font-size: 11px; }
 @keyframes lift { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
 
 /* A line of words always moving. */
-.ticker { overflow: hidden; background: var(--paper); padding: 11px 0; -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+.ticker { overflow: hidden; background: var(--paper); border-block: 1px solid var(--rule); padding: 11px 0; }
 .ticker-run { display: flex; width: max-content; animation: run 70s linear infinite; }
 .ticker span { font-family: var(--display); font-size: 15px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink); white-space: pre; }
 @keyframes run { to { transform: translateX(-50%); } }
@@ -160,13 +143,13 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .rail.dragging { scroll-snap-type: none; cursor: grabbing; user-select: none; }
 .card {
   flex: 0 0 var(--card); scroll-snap-align: center; scroll-snap-stop: always; position: relative; overflow: hidden;
-  background: linear-gradient(to bottom, var(--ground, var(--paper)) 62%, color-mix(in srgb, var(--ground, var(--paper)) 45%, var(--paper)) 100%);
+  background: var(--ground, var(--paper)); border: 1px solid var(--rule);
   transform: scale(calc(0.95 + var(--p, 1) * 0.05)); transform-origin: center bottom;
 }
 .plate { position: relative; width: 100%; }
 .plate-art { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .plate canvas, .plate video { position: absolute; }
-.plate video { object-fit: cover; border-radius: 50% 50% 0 0 / 28.125% 28.125% 0 0; background: var(--rule); -webkit-mask-image: linear-gradient(to bottom, #000 90%, transparent); mask-image: linear-gradient(to bottom, #000 90%, transparent); }
+.plate video { object-fit: cover; border-radius: 50% 50% 0 0 / 28.125% 28.125% 0 0; background: var(--rule); }
 .card-copy { padding: 8px 18px 18px; position: relative; }
 .card-copy .display { font-size: clamp(28px, 8vw, 38px); margin-bottom: 0.25em; }
 .card-copy > p:not(.spec) { font-size: 16px; line-height: 1.42; margin-bottom: 0.5em; min-height: 4.2em; }
@@ -183,7 +166,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .rail-ticks { display: flex; gap: 6px; list-style: none; margin: 0; padding: 0; }
 .rail-ticks button { width: 38px; height: 38px; font-family: var(--display); font-size: 15px; color: var(--ink); opacity: 0.45; border-bottom: 1px solid transparent; transition: opacity 0.25s, border-color 0.25s; }
 .rail-ticks button.on { opacity: 1; border-color: var(--accent); }
-.step-still { height: 240px; display: flex; align-items: flex-end; justify-content: center; padding: 22px 20px 10px; background: radial-gradient(closest-side at 50% 62%, var(--glow), transparent); }
+.step-still { height: 240px; display: flex; align-items: flex-end; justify-content: center; padding: 22px 20px 10px; }
 .step-still img { max-height: 100%; width: auto; max-width: 70%; }
 
 /* The formula film and the box */
@@ -209,7 +192,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .qa dd { margin: 4px 0 0; font-size: 16px; }
 
 /* Formula IDs */
-.ids { padding: 72px 0 72px; background: linear-gradient(to bottom, var(--paper), var(--hero) 72px, var(--hero) calc(100% - 72px), var(--paper)); }
+.ids { padding: 56px 0 48px; background: var(--hero); }
 .ids .copy { padding-bottom: 26px; }
 .ids .idcard { margin: 0 var(--gutter); }
 .seal-art { width: 100%; height: auto; overflow: visible; }
@@ -227,8 +210,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .app-icon { width: 96px; height: 96px; border-radius: 22px; margin-left: var(--gutter); order: 1; }
 
 /* Footer */
-.footer img { width: 100%; height: auto; }
-.footer-row { padding: 18px var(--gutter) calc(26px + env(safe-area-inset-bottom)); display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; }
+.footer { position: relative; border-top: 1px solid var(--rule); }
+.footer-panther { position: absolute; right: var(--gutter); bottom: 0; height: 84px; width: auto; opacity: 0.6; }
+.footer-row { min-height: 96px; padding: 18px calc(var(--gutter) + 56px) calc(18px + env(safe-area-inset-bottom)) var(--gutter); display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; }
 .footer-row p { margin: 0; }
 .footer-row .small { width: 100%; }
 
@@ -248,14 +232,12 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .hero-foot { padding: 0; }
   .hero-foot .lede { font-size: clamp(18px, 1.5vw, 22px); }
   .hero-actions { margin: 24px 0 14px; }
-  .hero-home { display: block; min-height: 0; padding: 0; aspect-ratio: auto; height: min(56.28vw, calc(100svh - var(--nav))); }
-  .hero-photo { object-position: 50% 40%; }
-  .hero-home::after { background: linear-gradient(to bottom, var(--paper) 0%, transparent 8%, transparent 84%, var(--paper) 100%); }
-  .hero-home::before { width: 44%; -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent 92%); mask-image: linear-gradient(to bottom, #000 72%, transparent 92%); }
-  .hero-home .hero-words { position: absolute; left: var(--gutter); top: 50%; transform: translateY(-54%); width: 31vw; padding: 0; }
-  .hero-home h1 { font-size: clamp(40px, 4.25vw, 96px); margin-bottom: 1.1vw; }
-  .hero-home .lede { font-size: clamp(15px, 1.4vw, 26px); max-width: none; }
-  .hero-home .hero-actions { flex-direction: row; align-items: center; gap: 20px; margin: 1.4vw 0 0; }
+  .hero-home { display: block; min-height: 0; padding: 0; height: min(calc(100svh - var(--nav)), 62vw); }
+  .hero-photo { inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
+  .hero-home .hero-words { position: absolute; left: var(--gutter); top: 50%; transform: translateY(-50%); width: 44vw; padding: 0; }
+  .hero-home h1 { font-size: clamp(44px, min(5.4vw, 13svh), 104px); margin-bottom: 1.1vw; }
+  .hero-home .lede { font-size: clamp(16px, 1.5vw, 28px); max-width: 34vw; }
+  .hero-home .hero-actions { gap: 20px; margin: 1.4vw 0 0; }
   .hero-home .pill { min-height: 50px; padding: 0 26px; font-size: 12px; }
   .hero-page { min-height: 86svh; padding-bottom: 48px; }
   .hero-page .idcard { margin: 0; width: min(36vw, 400px); }
@@ -297,6 +279,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .app-icon { width: 140px; height: 140px; border-radius: 32px; margin: 0; order: 1; }
 
   .footer-row .small { width: auto; margin-left: auto; }
+  .footer-panther { height: 96px; }
+  .footer-row { padding-right: calc(var(--gutter) + 72px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
