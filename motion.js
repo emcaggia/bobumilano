@@ -107,7 +107,6 @@
     let x0 = 0, left0 = 0;
     rail.addEventListener('dragstart', (e) => e.preventDefault());
     rail.addEventListener('pointerdown', (e) => {
-      stopNudge();
       if (e.pointerType !== 'mouse') return;
       down = true; moved = false; x0 = e.clientX; left0 = rail.scrollLeft;
     });
@@ -126,18 +125,6 @@
     rail.addEventListener('click', (e) => {
       if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; }
     }, true);
-
-    // The cards lean over once when they first come into view, to show they move.
-    function stopNudge() { rail.classList.remove('nudge'); }
-    rail.addEventListener('animationend', stopNudge);
-    if (!reduce) {
-      const seen = new IntersectionObserver(([e]) => {
-        if (!e.isIntersecting) return;
-        seen.disconnect();
-        rail.classList.add('nudge');
-      }, { threshold: 0.6 });
-      seen.observe(rail);
-    }
 
     wide.addEventListener('change', start);
     start();
