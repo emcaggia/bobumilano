@@ -1,6 +1,6 @@
 'use strict';
 const $ = (s, root=document) => root.querySelector(s);
-const A='assets/';
+const A='assets/';const FILM='assets/film/formula.mp4';
 const money=n=>new Intl.NumberFormat('en-IE',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(n);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const arrow='<svg class="arrow" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 16 16 4M7 4h9v9"/></svg>';
@@ -43,7 +43,7 @@ let finder={step:0,category:null,look:null};
 function buttonLink(href,text,cls=''){return `<a class="button ${cls}" href="${href}">${text}${arrow}</a>`}
 function art(name,cls=''){return `<img class="${cls}" src="${A}art/${name}.svg" alt="" loading="lazy">`}
 function stage(p,cls=''){return `<div class="product-stage ${cls}" data-type="${p.id}"><div class="plate">${shotImages(p,'plate-shot')}</div></div>`}
-function filmPlate(){return `<div class="plate film-plate"><img class="plate-shot" src="${A}shots/foundation.webp" alt="BOBU Skin Foundation" draggable="false"></div>`}
+function filmPlate(){return `<div class="plate film-plate"><video muted loop playsinline preload="metadata" poster="${A}film/formula.jpg" aria-label="BOBU foundation texture and product film"><source src="${FILM}" type="video/mp4"></video><button class="film-play" type="button" aria-label="Play the film"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg></button></div>`}
 const SHOTS={"foundation": "foundation.webp", "concealer": "concealer.webp", "blush": "blush.webp", "lip": "lip-open.webp", "gloss": "gloss.webp"},GALLERIES={"lip": ["lip-open.webp", "lip-top.webp", "lip.webp"]},COMMUNITY=[];
 function shotImages(p,cls){const list=GALLERIES[p.id]||[SHOTS[p.id]],alt=`${p.name} in BOBU Milano packaging`;if(list.length<2)return `<img class="${cls}" src="${A}shots/${list[0]}" alt="${alt}" draggable="false">`;return `<div class="swipe">${list.map((s,i)=>`<img src="${A}shots/${s}" alt="${i?'':alt}" draggable="false">`).join('')}</div><div class="swipe-dots" aria-hidden="true">${list.map(()=>'<i></i>').join('')}</div>`}
 function shotCard(p){return `<article class="product-card shot-card"><a href="product.html?id=${p.id}"><div class="shot is-photo">${shotImages(p,'')}</div><div class="shot-line"><h3>${p.name}</h3><span class="price">${money(p.price)}</span></div></a></article>`}

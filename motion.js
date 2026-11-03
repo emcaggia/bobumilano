@@ -1,8 +1,38 @@
-// The card carousel, and products that swipe through their shots.
+// The card carousel, products that swipe through their shots, and films that play when seen.
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const wide = matchMedia('(min-width: 821px)');
 
+  // ---- Films ----
+  // Low Power Mode, data savers and some in-app browsers won't let a film start by itself. Then the poster stays with a
+  // play button on it, and the next tap anywhere starts the film.
+  const waiting = new Set();
+  function playFilm(v) {
+    const plate = v.closest('.film-plate');
+    const shown = v.play();
+    if (!shown) return;
+    shown.then(() => { waiting.delete(v); plate.classList.remove('film-waiting'); }).catch((e) => {
+      if (e.name !== 'NotAllowedError') return;
+      waiting.add(v);
+      plate.classList.add('film-waiting');
+    });
+  }
+  const films = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (!e.isIntersecting) { e.target.pause(); continue; }
+      if (reduce) { waiting.add(e.target); e.target.closest('.film-plate').classList.add('film-waiting'); continue; }
+      playFilm(e.target);
+    }
+  }, { threshold: 0.25 });
+  const retry = () => { if (!reduce) waiting.forEach(playFilm); };
+  addEventListener('touchend', retry, { passive: true });
+  addEventListener('click', (e) => {
+    const button = e.target.closest('.film-play');
+    if (button) { button.closest('.film-plate').classList.remove('film-waiting'); playFilm(button.closest('.film-plate').querySelector('video')); }
+    else retry();
+  });
+
+  // ---- The carousel ----
   // On wide screens a copy of the set sits either side of it, so there are always cards on both sides. On phones the
   // copies stay hidden.
   function copyCards(rail) {
@@ -80,6 +110,7 @@
     let x0 = 0, left0 = 0;
     rail.addEventListener('dragstart', (e) => e.preventDefault());
     rail.addEventListener('pointerdown', (e) => {
+      stopNudge();
       if (e.pointerType !== 'mouse') return;
       down = true; moved = false; x0 = e.clientX; left0 = rail.scrollLeft;
     });
@@ -98,6 +129,18 @@
     rail.addEventListener('click', (e) => {
       if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; }
     }, true);
+
+    // The cards lean over once when they first come into view, to show they move.
+    function stopNudge() { rail.classList.remove('nudge'); }
+    rail.addEventListener('animationend', stopNudge);
+    if (!reduce) {
+      const seen = new IntersectionObserver(([e]) => {
+        if (!e.isIntersecting) return;
+        seen.disconnect();
+        rail.classList.add('nudge');
+      }, { threshold: 0.6 });
+      seen.observe(rail);
+    }
 
     wide.addEventListener('change', start);
     start();
@@ -146,6 +189,7 @@
       swipe.dataset.ready = '1';
       setupSwipe(swipe);
     });
+    document.querySelectorAll('.film-plate video:not([data-seen])').forEach((v) => { v.dataset.seen = '1'; films.observe(v); });
   }
   let queued = false;
   new MutationObserver(() => {
