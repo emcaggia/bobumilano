@@ -33,8 +33,7 @@
   });
 
   // ---- The carousel ----
-  // On wide screens a copy of the set sits either side of it, so there are always cards on both sides. On phones the
-  // copies stay hidden.
+  // A copy of the set sits either side of it, so there are always cards on both sides and it never runs out.
   function copyCards(rail) {
     const originals = [...rail.children];
     const copies = () => originals.map((card) => {
@@ -53,7 +52,7 @@
     const count = all.length / 3;
     const ui = rail.nextElementSibling;
     const ticks = [...ui.querySelectorAll('.rail-ticks button')];
-    const shown = () => (wide.matches ? all : all.slice(count, count * 2));
+    const shown = () => all;
     const offsetFor = (card) => card.offsetLeft - (rail.clientWidth - card.offsetWidth) / 2;
 
     const current = () => {
@@ -74,14 +73,12 @@
     const mark = () => {
       const now = current();
       ticks.forEach((t, i) => t.classList.toggle('on', i === now % count));
-      ui.querySelector('[data-go="-1"]').disabled = !wide.matches && now === count;
-      ui.querySelector('[data-go="1"]').disabled = !wide.matches && now === count * 2 - 1;
     };
 
     // After a move ends on a copy, jump to the same place in the middle set. The cards look identical, so it can't be seen.
     let down = false, moved = false, settle = 0;
     const wrap = () => {
-      if (down || !wide.matches) return;
+      if (down) return;
       const i = current();
       const shift = i < count ? count : i >= count * 2 ? -count : 0;
       if (!shift) return;
@@ -92,7 +89,7 @@
     ticks.forEach((t, i) => t.addEventListener('click', () => {
       // The nearest copy of that card, so the loop always takes the short way round.
       const here = current();
-      const options = wide.matches ? [i, i + count, i + count * 2] : [i + count];
+      const options = [i, i + count, i + count * 2];
       go(options.reduce((a, b) => (Math.abs(b - here) < Math.abs(a - here) ? b : a)));
     }));
     ui.querySelectorAll('.rail-arrow').forEach((a) => a.addEventListener('click', () => go(current() + Number(a.dataset.go))));
