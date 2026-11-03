@@ -213,9 +213,8 @@ article.formula-card{display:block}
 .formula-card .formula-link{display:block}
 .formula-shot{display:block;width:100%;height:100%;object-fit:cover;-webkit-user-drag:none}
 .formula-card .formula-info{padding:18px}
-.formula-card .creator-link{align-items:flex-start;margin-bottom:18px;font-size:var(--small);color:var(--muted)}
+.formula-card .creator-link{align-items:flex-start;margin-bottom:12px;font-size:var(--body);color:var(--ink)}
 .creator-link strong{display:block;font-family:var(--serif);font-weight:400;font-size:var(--heading);line-height:1.05;letter-spacing:-.03em;color:var(--ink);margin-top:2px}
-.formula-card .creator-link small{margin-top:4px}
 .formula-info .formula-id{position:static;display:block;max-width:none;margin-bottom:6px}
 .formula-card .formula-info>p{margin:6px 0 16px}
 .plate-shot{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center bottom;-webkit-user-drag:none}
