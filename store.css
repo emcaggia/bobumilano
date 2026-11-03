@@ -168,7 +168,7 @@ svg.arrow{display:inline-block;width:1.3em;height:1.3em;fill:none;stroke:current
  .wordmark{font-size:28px}
  .wordmark small{font-size:5px}
  .footer-brand .wordmark,.dialog-top .wordmark{font-size:18px}
- .hero{height:auto;min-height:0;max-height:none;aspect-ratio:1134/1687;display:block}
+ .hero{height:auto;min-height:0;max-height:none;aspect-ratio:1134/1967;display:block}
  .hero-photo{object-position:50% 0}
  .hero-copy{display:block;padding:64px 20px 0}
  .hero .eyebrow{margin-bottom:12px}
@@ -202,9 +202,9 @@ svg.arrow{display:inline-block;width:1.3em;height:1.3em;fill:none;stroke:current
 .film-copy .body-copy{margin:16px 0 28px}
 .film-plate.lip-film{aspect-ratio:9/16;width:min(100%,400px,calc((100svh - 130px) * 9 / 16));max-width:none;justify-self:center}
 @media(max-width:760px){.formula-still{height:70%}.film-section{grid-template-columns:minmax(0,1fr);gap:28px}.film-plate.lip-film{order:-1;width:100%}}
-.hero-copy .hero-line{font-size:var(--heading);line-height:1.08;letter-spacing:-.03em;max-width:600px;text-wrap:balance}
-.hero-line+.hero-actions{margin-top:28px}
-@media(max-width:760px){.hero-line+.hero-actions{flex-wrap:wrap;gap:14px 21px}}
+.hero-copy .hero-lead{max-width:430px;text-wrap:balance}
+.hero-lead+.hero-actions{margin-top:28px}
+@media(max-width:760px){.hero-lead+.hero-actions{flex-wrap:wrap;gap:14px 21px;margin-top:20px}}
 article.formula-card{display:block}
 .formula-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
 .formula-person{display:grid;place-items:center;aspect-ratio:1;overflow:hidden;background:var(--avatar,#e6cdb5);color:var(--ink);font-family:var(--serif);font-size:var(--heading)}
