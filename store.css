@@ -221,10 +221,11 @@ article.formula-card{display:block}
 .swipe{position:absolute;inset:0;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none}
 .swipe::-webkit-scrollbar{display:none}
 .swipe img,.shot.is-photo .swipe img{flex:0 0 100%;width:100%;height:100%;min-width:0;object-fit:contain;object-position:center bottom;scroll-snap-align:center;scroll-snap-stop:always;-webkit-user-drag:none}
+.swipe img.swipe-fill,.shot.is-photo .swipe img.swipe-fill{object-fit:cover;object-position:center}
 .rail .swipe{overflow:hidden}
 .swipe-dots{position:absolute;left:0;right:0;bottom:12px;display:flex;justify-content:center;gap:6px;pointer-events:none}
-.swipe-dots i{width:6px;height:6px;border-radius:50%;background:#071c4a;opacity:.22}
-.swipe-dots i.on{opacity:1}
+.swipe-dots i{width:6px;height:6px;border-radius:50%;background:#f0e9e0;box-shadow:0 0 0 1px #071c4a66}
+.swipe-dots i.on{background:#071c4a;box-shadow:0 0 0 1px #f0e9e0}
 @media(hover:none){.rail .swipe-dots{display:none}}
 .shot{position:relative;aspect-ratio:1;background:#f0e9e0;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .shot img{display:block;width:76%;height:80%;object-fit:contain;-webkit-user-drag:none}
