@@ -30,8 +30,6 @@ svg.arrow{display:inline-block;width:1.3em;height:1.3em;fill:none;stroke:current
 .plate canvas,.plate video{position:absolute}
 .plate-art{position:absolute;inset:0;width:100%;height:100%;overflow:visible;opacity:.42}
 .orn{opacity:.42}
-.spin{transform-box:fill-box;transform-origin:center;animation:spin 90s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
 /* Deep blue: the logo, the main action on a page, the bag count, formula IDs and the way forward in the carousel. */
 .site-header>.wordmark,.bag-count{--ink:var(--deep-blue)}
 .footer-brand .wordmark,.dialog-top .wordmark{color:var(--ink)}
@@ -129,10 +127,8 @@ svg.arrow{display:inline-block;width:1.3em;height:1.3em;fill:none;stroke:current
 .rail::-webkit-scrollbar{display:none}
 .rail.dragging{scroll-snap-type:none;cursor:grabbing;user-select:none}
 .rail a{-webkit-user-drag:none}
-.rail .product-card{flex:0 0 var(--card);min-width:0;scroll-snap-align:center;scroll-snap-stop:always;transform:scale(calc(.95 + var(--p,1) * .05));transform-origin:center bottom}
+.rail .product-card{flex:0 0 var(--card);min-width:0;scroll-snap-align:center;scroll-snap-stop:always}
 .rail .product-card.is-copy{display:none}
-.rail.nudge .product-card{animation:rail-nudge 1.3s cubic-bezier(.35,0,.2,1) .25s 1 both}
-@keyframes rail-nudge{0%,100%{translate:0}38%{translate:-64px 0}72%{translate:7px 0}}
 .rail .product-name-line{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
 .rail .product-name-line h3{font-size:var(--title);line-height:1.1}
 .rail .product-name-line .price{display:inline;margin:0;font-size:var(--body)}
@@ -202,8 +198,18 @@ svg.arrow{display:inline-block;width:1.3em;height:1.3em;fill:none;stroke:current
 .film-plate video{inset:0;width:100%;height:100%;object-fit:cover;border-radius:0}
 .shot-card>a{display:block;color:inherit}
 .product-stage{background:#f0e9e0!important}
-.plate-shot{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;-webkit-user-drag:none}
-.shot{aspect-ratio:1;background:#f1e8df;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.product-stage .plate{aspect-ratio:800/860}
+.film-plate{background:#f0e9e0}
+.plate-shot{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center bottom;-webkit-user-drag:none}
+.swipe{position:absolute;inset:0;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none}
+.swipe::-webkit-scrollbar{display:none}
+.swipe img,.shot.is-photo .swipe img{flex:0 0 100%;width:100%;height:100%;min-width:0;object-fit:contain;object-position:center bottom;scroll-snap-align:center;scroll-snap-stop:always;-webkit-user-drag:none}
+.rail .swipe{overflow:hidden}
+.swipe-dots{position:absolute;left:0;right:0;bottom:12px;display:flex;justify-content:center;gap:6px;pointer-events:none}
+.swipe-dots i{width:6px;height:6px;border-radius:50%;background:#071c4a;opacity:.22}
+.swipe-dots i.on{opacity:1}
+@media(hover:none){.rail .swipe-dots{display:none}}
+.shot{position:relative;aspect-ratio:1;background:#f0e9e0;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .shot img{display:block;width:76%;height:80%;object-fit:contain;-webkit-user-drag:none}
 .shot.is-photo img{width:100%;height:100%;object-fit:cover}
 .shot-line{padding-top:12px}
