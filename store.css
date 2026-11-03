@@ -201,6 +201,8 @@ svg.arrow{display:inline-block;width:1.3em;height:1.3em;fill:none;stroke:current
 .film-plate{aspect-ratio:4/5;width:min(100%,460px);max-width:none}
 .film-plate video{inset:0;width:100%;height:100%;object-fit:cover;border-radius:0}
 .shot-card>a{display:block;color:inherit}
+.product-stage{background:#f0e9e0!important}
+.plate-shot{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;-webkit-user-drag:none}
 .shot{aspect-ratio:1;background:#f1e8df;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .shot img{display:block;width:76%;height:80%;object-fit:contain;-webkit-user-drag:none}
 .shot.is-photo img{width:100%;height:100%;object-fit:cover}
